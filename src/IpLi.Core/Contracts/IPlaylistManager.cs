@@ -14,10 +14,10 @@ namespace IpLi.Core.Contracts
         Task<Playlist> GetAsync(String name,
                                 CancellationToken cancel = default);
 
-        Task<Playlist> CreatePlaylistAsync(Playlist playlist,
+        Task<Playlist> CreateAsync(Playlist playlist,
                                            CancellationToken cancel = default);
         
-        Task<Playlist> UpdatePlaylistAsync(Playlist playlist,
+        Task<Playlist> UpdateAsync(Playlist playlist,
                                            CancellationToken cancel = default);
         
         Task DeleteAsync(String name,

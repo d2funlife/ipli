@@ -30,9 +30,13 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Controllers\ApiControllers" />
-      <Folder Include="Models\Requests" />
-      <Folder Include="Models\Responses" />
+      <ProjectReference Include="..\IpLi.BusinessLogic\IpLi.BusinessLogic.csproj" />
+      <ProjectReference Include="..\IpLi.Core\IpLi.Core.csproj" />
+      <ProjectReference Include="..\IpLi.Data.Json\IpLi.Data.Json.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="wwwroot\data" />
     </ItemGroup>
 
     <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

@@ -6,8 +6,20 @@ namespace IpLi.Core.Entities
     {
         public String Title { get; set; }
         public String[] AlternativeTitles { get; set; }
-        public String ImgUrl { get; set; }
+        public String ImageUrl { get; set; }
 
         public Source[] Sources { get; set; }
+
+        public void Update(Channel target)
+        {
+            if(target == null)
+            {
+                throw new ArgumentNullException(nameof(target));
+            }
+
+            Title = target.Title;
+            AlternativeTitles = target.AlternativeTitles;
+            ImageUrl = target.ImageUrl;
+        }
     }
 }

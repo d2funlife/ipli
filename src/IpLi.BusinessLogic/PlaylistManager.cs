@@ -21,13 +21,13 @@ namespace IpLi.BusinessLogic
             throw new NotImplementedException();
         }
 
-        public Task<Playlist> CreatePlaylistAsync(Playlist playlist,
+        public Task<Playlist> CreateAsync(Playlist playlist,
                                         CancellationToken cancel = default)
         {
             throw new NotImplementedException();
         }
 
-        public Task<Playlist> UpdatePlaylistAsync(Playlist playlist,
+        public Task<Playlist> UpdateAsync(Playlist playlist,
                                         CancellationToken cancel = default)
         {
             throw new NotImplementedException();

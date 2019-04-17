@@ -1,3 +1,8 @@
+using System.IO;
+using IpLi.BusinessLogic;
+using IpLi.Core.Contracts;
+using IpLi.Data.Contracts;
+using IpLi.Data.Json;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -25,6 +30,10 @@ namespace IpLi.Web
 
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration => { configuration.RootPath = "ClientApp/dist"; });
+
+            services.AddTransient<IChannelManager, ChannelManager>();
+
+            services.AddTransient<IChannelRepository>(provider => new ChannelRepository(Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "data", "channels.json")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

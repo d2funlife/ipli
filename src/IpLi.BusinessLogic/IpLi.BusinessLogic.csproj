@@ -7,6 +7,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\IpLi.Core\IpLi.Core.csproj" />
+      <ProjectReference Include="..\IpLi.Data.Contracts\IpLi.Data.Contracts.csproj" />
     </ItemGroup>
 
 </Project>

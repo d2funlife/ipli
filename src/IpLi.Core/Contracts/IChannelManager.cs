@@ -20,6 +20,9 @@ namespace IpLi.Core.Contracts
         Task<Channel> UpdateAsync(Channel channel,
                                   CancellationToken cancel = default);
 
+        Task<Channel> CreateOrUpdateAsync(Channel channel,
+                                          CancellationToken cancel = default);
+
         Task DeleteAsync(String title,
                          CancellationToken cancel = default);
 
