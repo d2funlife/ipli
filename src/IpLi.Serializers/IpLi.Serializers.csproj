@@ -8,4 +8,8 @@
       <ProjectReference Include="..\IpLi.Core\IpLi.Core.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <PackageReference Include="m3uParser.NET" Version="1.0.17" />
+    </ItemGroup>
+
 </Project>

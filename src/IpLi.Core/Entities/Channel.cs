@@ -9,6 +9,7 @@ namespace IpLi.Core.Entities
         public String[] AlternativeTitles { get; set; }
         public String ImageUrl { get; set; }
 
+        public String CurrentSourceUrl { get; set; }
         public Source[] Sources { get; set; }
 
         public void Update(Channel target)

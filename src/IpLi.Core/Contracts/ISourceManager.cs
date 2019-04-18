@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 using IpLi.Core.Entities;
@@ -22,5 +23,8 @@ namespace IpLi.Core.Contracts
 
         Task DeleteAsync(String title,
                          CancellationToken cancel = default);
+
+        Task<Int32> ImportSourcesAsync(Stream playlistStream,
+                                       CancellationToken cancel = default);
     }
 }
