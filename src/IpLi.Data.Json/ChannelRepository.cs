@@ -55,10 +55,13 @@ namespace IpLi.Data.Json
                                                   CancellationToken cancel = default)
         {
             var allChannels = await GetAllChannelsFromFileAsync(cancel);
-            
+
             var page = new Page<Channel>
             {
-                Items = allChannels.Skip(query.Offset).Take(query.Limit).Select(x=>x.Value).ToList(),
+                Items = allChannels.Skip(query.Offset)
+                                   .Take(query.Limit)
+                                   .Select(x => x.Value)
+                                   .ToList(),
                 TotalCount = allChannels.Count
             };
 
@@ -84,6 +87,15 @@ namespace IpLi.Data.Json
 
             await SaveAllChannelsToFileAsync(allChannels, cancel);
             return channel;
+        }
+
+        public async Task DeleteAsync(String alias,
+                                      CancellationToken cancel = default)
+        {
+            var allChannels = await GetAllChannelsFromFileAsync(cancel);
+            allChannels.Remove(alias);
+
+            await SaveAllChannelsToFileAsync(allChannels, cancel);
         }
     }
 }

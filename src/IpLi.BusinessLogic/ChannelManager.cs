@@ -64,11 +64,12 @@ namespace IpLi.BusinessLogic
             }
         }
 
-        public Task DeleteAsync(String title,
+        public Task DeleteAsync(String alias,
                                 CancellationToken cancel = default)
         {
-            throw new NotImplementedException();
+            return _channelRepository.DeleteAsync(alias, cancel);
         }
+        
 
         public Task<Channel> AddSource(Source source,
                                        CancellationToken cancel = default)

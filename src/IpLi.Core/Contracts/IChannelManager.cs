@@ -23,7 +23,7 @@ namespace IpLi.Core.Contracts
         Task<Channel> CreateOrUpdateAsync(Channel channel,
                                           CancellationToken cancel = default);
 
-        Task DeleteAsync(String title,
+        Task DeleteAsync(String alias,
                          CancellationToken cancel = default);
 
         Task<Channel> AddSource(Source source,

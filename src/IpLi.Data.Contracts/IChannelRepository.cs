@@ -19,5 +19,8 @@ namespace IpLi.Data.Contracts
 
         Task<Channel> UpdateAsync(Channel channel,
                                   CancellationToken cancel = default);
+
+        Task DeleteAsync(String alias,
+                         CancellationToken cancel = default);
     }
 }

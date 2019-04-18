@@ -46,9 +46,10 @@ namespace IpLi.Web.Controllers.ApiControllers
             return Ok(new ChannelResponse(channel));
         }
 
-        [HttpDelete("{title}")]
-        public async Task<ActionResult> Delete([FromRoute]String title)
+        [HttpDelete("{alias}")]
+        public async Task<ActionResult> Delete([FromRoute]String alias)
         {
+            await _channelManager.DeleteAsync(alias, Cancel);
             return Ok();
         }
     }
