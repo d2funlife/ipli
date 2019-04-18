@@ -4,6 +4,7 @@ namespace IpLi.Core.Entities
 {
     public class Channel
     {
+        public String Alias { get; set; }
         public String Title { get; set; }
         public String[] AlternativeTitles { get; set; }
         public String ImageUrl { get; set; }

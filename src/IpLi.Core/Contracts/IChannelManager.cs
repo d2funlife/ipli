@@ -11,7 +11,7 @@ namespace IpLi.Core.Contracts
         Task<Page<Channel>> GetAsync(ChannelQuery query,
                                      CancellationToken cancel = default);
 
-        Task<Channel> GetAsync(String title,
+        Task<Channel> GetAsync(String alias,
                                CancellationToken cancel = default);
 
         Task<Channel> CreateAsync(Channel channel,

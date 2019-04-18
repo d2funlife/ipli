@@ -39,16 +39,16 @@ namespace IpLi.Data.Json
             await File.WriteAllTextAsync(_filePath, channelsString, cancel);
         }
 
-        public async Task<Channel> GetAsync(String title,
+        public async Task<Channel> GetAsync(String alias,
                                             CancellationToken cancel = default)
         {
             var allChannels = await GetAllChannelsFromFileAsync(cancel);
-            if(!allChannels.ContainsKey(title))
+            if(!allChannels.ContainsKey(alias))
             {
                 return null;
             }
 
-            return allChannels[title];
+            return allChannels[alias];
         }
 
         public async Task<Page<Channel>> GetAsync(ChannelQuery query,
@@ -69,7 +69,7 @@ namespace IpLi.Data.Json
                                             CancellationToken cancel = default)
         {
             var allChannels = await GetAllChannelsFromFileAsync(cancel);
-            allChannels.Add(channel.Title, channel);
+            allChannels.Add(channel.Alias, channel);
 
             await SaveAllChannelsToFileAsync(allChannels, cancel);
             return channel;
@@ -79,7 +79,7 @@ namespace IpLi.Data.Json
                                                CancellationToken cancel = default)
         {
             var allChannels = await GetAllChannelsFromFileAsync(cancel);
-            allChannels[channel.Title] = channel;
+            allChannels[channel.Alias] = channel;
 
 
             await SaveAllChannelsToFileAsync(allChannels, cancel);

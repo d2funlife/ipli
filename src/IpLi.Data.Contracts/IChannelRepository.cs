@@ -8,7 +8,7 @@ namespace IpLi.Data.Contracts
 {
     public interface IChannelRepository
     {
-        Task<Channel> GetAsync(String title,
+        Task<Channel> GetAsync(String alias,
                                CancellationToken cancel = default);
 
         Task<Page<Channel>> GetAsync(ChannelQuery query,

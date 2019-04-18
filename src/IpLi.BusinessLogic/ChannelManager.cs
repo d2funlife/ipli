@@ -24,10 +24,10 @@ namespace IpLi.BusinessLogic
             return _channelRepository.GetAsync(query, cancel);
         }
 
-        public Task<Channel> GetAsync(String title,
+        public Task<Channel> GetAsync(String alias,
                                       CancellationToken cancel = default)
         {
-            throw new NotImplementedException();
+            return _channelRepository.GetAsync(alias, cancel);
         }
 
         public Task<Channel> CreateAsync(Channel channel,
