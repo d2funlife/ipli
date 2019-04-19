@@ -15,5 +15,14 @@ namespace IpLi.Core.Entities
         {
             Id = Guid.NewGuid();
         }
+
+        public void Update(Source target)
+        {
+            Title = target.Title;
+            Url = target.Url;
+            PriorityNumber = target.PriorityNumber;
+            LastScanDate = target.LastScanDate;
+            FrameSize = target.FrameSize;
+        }
     }
 }

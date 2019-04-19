@@ -28,7 +28,10 @@ namespace IpLi.Core.Contracts
         Task<Int32> ImportSourcesAsync(Stream playlistStream,
                                        CancellationToken cancel = default);
 
-        Task<Page<SourceAggregation>> GetAggregationByTitle(SourceQuery query,
-                                                            CancellationToken cancel = default);
+        Task<Page<SourceAggregation>> GetAggregationByTitleAsync(SourceQuery query,
+                                                                 CancellationToken cancel = default);
+
+        Task<Page<String>> GetAggregationTitlesAsync(SourceQuery query,
+                                                     CancellationToken cancel = default);
     }
 }

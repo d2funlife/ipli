@@ -11,11 +11,17 @@ namespace IpLi.Data.Contracts
     {
         Task<Page<Source>> GetAsync(SourceQuery query,
                                     CancellationToken cancel = default);
-        
+
         Task<Int32> AddRangeAsync(List<Source> sources,
                                   CancellationToken cancel = default);
 
-        Task<Page<SourceAggregation>> GetAggregationByTitle(SourceQuery query,
+        Task<Page<SourceAggregation>> GetAggregationByTitleAsync(SourceQuery query,
                                                             CancellationToken cancel = default);
+
+        Task UpdateRange(List<Source> sources,
+                         CancellationToken cancel = default);
+
+        Task<Page<String>> GetAggregationTitlesAsync(SourceQuery query,
+                                                     CancellationToken cancel = default);
     }
 }

@@ -29,11 +29,19 @@ namespace IpLi.Web.Controllers.ApiControllers
         }
 
         [HttpGet("aggregations/title")]
-        public async Task<ActionResult<Page<SourceAggregationResponse>>> GetAggregationByTitile([FromQuery] GetSourcesRequest request)
+        public async Task<ActionResult<Page<SourceAggregationResponse>>> GetAggregationByTitle([FromQuery] GetSourcesRequest request)
         {
-            var sourcesPage = await _sourceManager.GetAggregationByTitle(request.ToDomain(), Cancel);
+            var sourcesPage = await _sourceManager.GetAggregationByTitleAsync(request.ToDomain(), Cancel);
             SetTotalCountHeader(sourcesPage.TotalCount);
-            return Ok(sourcesPage.Items.Select(x=> new SourceAggregationResponse(x.Title, x.Sources)));
+            return Ok(sourcesPage.Items.Select(x => new SourceAggregationResponse(x.Title, x.Sources)));
+        }
+
+        [HttpGet("titles")]
+        public async Task<ActionResult<Page<String>>> GetTitles([FromQuery] GetSourcesRequest request)
+        {
+            var sourcesPage = await _sourceManager.GetAggregationTitlesAsync(request.ToDomain(), Cancel);
+            SetTotalCountHeader(sourcesPage.TotalCount);
+            return Ok(sourcesPage.Items);
         }
 
         [HttpPost("import")]

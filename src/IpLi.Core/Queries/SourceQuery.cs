@@ -8,5 +8,13 @@ namespace IpLi.Core.Queries
                            Int32 limit = DefaultLimit) : base(offset, limit)
         {
         }
+
+        public static SourceQuery GetMax()
+        {
+            return new SourceQuery
+            {
+                Limit = Int32.MaxValue
+            };
+        }
     }
 }

@@ -7,7 +7,7 @@ namespace IpLi.Core.Queries
 {
     public abstract class BaseQuery
     {
-        protected const Int32 MaxLimit = 50;
+        protected const Int32 MaxLimit = 1000;
         protected const Int32 DefaultLimit = 20;
         protected const Int32 DefaultOffset = 0;
         protected const String OrderDesc = "desc";

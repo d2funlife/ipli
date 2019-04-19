@@ -35,18 +35,57 @@ namespace IpLi.Data.Json
             };
         }
 
-        public async Task<Page<SourceAggregation>> GetAggregationByTitle(SourceQuery query,
-                                                                         CancellationToken cancel = default)
+        public async Task<Page<SourceAggregation>> GetAggregationByTitleAsync(SourceQuery query,
+                                                                              CancellationToken cancel = default)
         {
             var allSources = await GetAllSourcesFromFileAsync(cancel);
 
-            var aggregateByTitle = allSources.Values.GroupBy(x => x.Title.ToLowerInvariant())
+            var aggregateByTitle = allSources.Values
+                                             .GroupBy(x => x.Title.ToLowerInvariant())
                                              .ToDictionary(x => x.Key, v => v.ToList());
 
             return new Page<SourceAggregation>
             {
                 TotalCount = aggregateByTitle.Count,
-                Items = aggregateByTitle.Select(x => new SourceAggregation(x.Key, x.Value)).ToList()
+                Items = aggregateByTitle.Skip(query.Offset)
+                                        .Take(query.Limit)
+                                        .Select(x => new SourceAggregation(x.Key, x.Value))
+                                        .ToList()
+            };
+        }
+
+        public async Task UpdateRange(List<Source> sources,
+                                      CancellationToken cancel = default)
+        {
+            var allSources = await GetAllSourcesFromFileAsync(cancel);
+            foreach (var source in sources)
+            {
+                if(!allSources.ContainsKey(source.Id))
+                {
+                    continue;
+                }
+
+                allSources[source.Id]
+                   .Update(source);
+            }
+
+            await SaveAllSourcesToFileAsync(allSources, cancel);
+        }
+
+        public async Task<Page<String>> GetAggregationTitlesAsync(SourceQuery query,
+                                                                  CancellationToken cancel = default)
+        {
+            var allSources = await GetAllSourcesFromFileAsync(cancel);
+
+            var aggregateByTitle = allSources.Values.GroupBy(x => x.Title.ToLowerInvariant())
+                                             .Select(x => x.Key)
+                                             .ToList();
+            return new Page<String>
+            {
+                TotalCount = aggregateByTitle.Count,
+                Items = aggregateByTitle.Skip(query.Offset)
+                                        .Take(query.Limit)
+                                        .ToList()
             };
         }
 

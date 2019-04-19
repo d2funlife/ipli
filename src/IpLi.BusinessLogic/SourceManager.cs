@@ -60,10 +60,16 @@ namespace IpLi.BusinessLogic
             }
         }
 
-        public Task<Page<SourceAggregation>> GetAggregationByTitle(SourceQuery query,
+        public Task<Page<SourceAggregation>> GetAggregationByTitleAsync(SourceQuery query,
                                           CancellationToken cancel = default)
         {
-            return _sourceRepository.GetAggregationByTitle(query, cancel);
+            return _sourceRepository.GetAggregationByTitleAsync(query, cancel);
+        }
+
+        public Task<Page<String>> GetAggregationTitlesAsync(SourceQuery query,
+                                              CancellationToken cancel = default)
+        {
+            return _sourceRepository.GetAggregationTitlesAsync(query, cancel);
         }
     }
 }
