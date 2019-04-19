@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
@@ -26,5 +27,8 @@ namespace IpLi.Core.Contracts
 
         Task<Int32> ImportSourcesAsync(Stream playlistStream,
                                        CancellationToken cancel = default);
+
+        Task<Page<SourceAggregation>> GetAggregationByTitle(SourceQuery query,
+                                                            CancellationToken cancel = default);
     }
 }

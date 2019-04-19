@@ -22,7 +22,7 @@ namespace IpLi.BusinessLogic
         public Task<Page<Source>> GetAsync(SourceQuery query,
                                            CancellationToken cancel = default)
         {
-            throw new NotImplementedException();
+            return _sourceRepository.GetAsync(query, cancel);
         }
 
         public Task<Source> GetAsync(String title,
@@ -58,6 +58,12 @@ namespace IpLi.BusinessLogic
                 var sources = M3uSerializer.Deserialize(playlistText);
                 return await _sourceRepository.AddRangeAsync(sources, cancel);
             }
+        }
+
+        public Task<Page<SourceAggregation>> GetAggregationByTitle(SourceQuery query,
+                                          CancellationToken cancel = default)
+        {
+            return _sourceRepository.GetAggregationByTitle(query, cancel);
         }
     }
 }

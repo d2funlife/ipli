@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using IpLi.Core.Entities;
+using IpLi.Core.Queries;
 using IpLi.Data.Contracts;
 using Newtonsoft.Json;
 
@@ -19,12 +20,43 @@ namespace IpLi.Data.Json
             _filePath = filePath;
         }
 
+        public async Task<Page<Source>> GetAsync(SourceQuery query,
+                                                 CancellationToken cancel = default)
+        {
+            var allSources = await GetAllSourcesFromFileAsync(cancel);
+
+            return new Page<Source>
+            {
+                TotalCount = allSources.Count,
+                Items = allSources.Skip(query.Offset)
+                                  .Take(query.Limit)
+                                  .Select(x => x.Value)
+                                  .ToList()
+            };
+        }
+
+        public async Task<Page<SourceAggregation>> GetAggregationByTitle(SourceQuery query,
+                                                                         CancellationToken cancel = default)
+        {
+            var allSources = await GetAllSourcesFromFileAsync(cancel);
+
+            var aggregateByTitle = allSources.Values.GroupBy(x => x.Title.ToLowerInvariant())
+                                             .ToDictionary(x => x.Key, v => v.ToList());
+
+            return new Page<SourceAggregation>
+            {
+                TotalCount = aggregateByTitle.Count,
+                Items = aggregateByTitle.Select(x => new SourceAggregation(x.Key, x.Value)).ToList()
+            };
+        }
+
+
         public async Task<Int32> AddRangeAsync(List<Source> sources,
                                                CancellationToken cancel = default)
         {
-            var existSources = await GetAllSourcesFromFileAsync(cancel);
-            var existUrls = existSources.Select(x => x.Value.Url)
-                                       .ToHashSet();
+            var allSources = await GetAllSourcesFromFileAsync(cancel);
+            var existUrls = allSources.Select(x => x.Value.Url)
+                                      .ToHashSet();
 
             var addedSources = 0;
             foreach (var source in sources)
@@ -33,15 +65,16 @@ namespace IpLi.Data.Json
                 {
                     continue;
                 }
-                
+
                 source.InitializeOnCreate();
-                existSources.Add(source.Id, source);
+                allSources.Add(source.Id, source);
                 addedSources++;
             }
 
-            await SaveAllSourcesToFileAsync(existSources, cancel);
+            await SaveAllSourcesToFileAsync(allSources, cancel);
             return addedSources;
         }
+
 
         private async Task<Dictionary<Guid, Source>> GetAllSourcesFromFileAsync(CancellationToken cancel)
         {
