@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using IpLi.Core.Contracts;
@@ -30,6 +31,12 @@ namespace IpLi.BusinessLogic
             return _channelRepository.GetAsync(alias, cancel);
         }
 
+        public Task<List<Channel>> GetAsync(List<String> aliases,
+                                            CancellationToken cancel = default)
+        {
+            return _channelRepository.GetAsync(aliases, cancel);
+        }
+
         public Task<Channel> CreateAsync(Channel channel,
                                          CancellationToken cancel = default)
         {
@@ -37,7 +44,7 @@ namespace IpLi.BusinessLogic
         }
 
         public async Task<Channel> UpdateAsync(Channel channel,
-                                         CancellationToken cancel = default)
+                                               CancellationToken cancel = default)
         {
             var existChannel = await _channelRepository.GetAsync(channel.Title, cancel);
             if(existChannel == null)
@@ -46,7 +53,7 @@ namespace IpLi.BusinessLogic
             }
 
             existChannel.Update(channel);
-            
+
             return await _channelRepository.UpdateAsync(channel, cancel);
         }
 
@@ -69,7 +76,7 @@ namespace IpLi.BusinessLogic
         {
             return _channelRepository.DeleteAsync(alias, cancel);
         }
-        
+
 
         public Task<Channel> AddSource(Source source,
                                        CancellationToken cancel = default)

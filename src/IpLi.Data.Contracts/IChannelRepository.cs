@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using IpLi.Core.Entities;
@@ -10,6 +11,9 @@ namespace IpLi.Data.Contracts
     {
         Task<Channel> GetAsync(String alias,
                                CancellationToken cancel = default);
+
+        Task<List<Channel>> GetAsync(List<String> titles,
+                                     CancellationToken cancel = default);
 
         Task<Page<Channel>> GetAsync(ChannelQuery query,
                                      CancellationToken cancel = default);

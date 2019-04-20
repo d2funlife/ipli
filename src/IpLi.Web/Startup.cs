@@ -3,6 +3,7 @@ using IpLi.BusinessLogic;
 using IpLi.Core.Contracts;
 using IpLi.Data.Contracts;
 using IpLi.Data.Json;
+using IpLi.Web.Models.Responses;
 using IpLi.Web.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -36,12 +37,15 @@ namespace IpLi.Web
             services.AddTransient<IChannelManager, ChannelManager>();
             services.AddTransient<ISourceManager, SourceManager>();
             services.AddTransient<ISourceScanner, SourceScanner>();
+            services.AddTransient<IPlaylistManager, PlaylistManager>();
 
             services.AddTransient<IChannelRepository>(provider => new ChannelRepository(Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "data", "channels.json")));
 
             services.AddTransient<ISourceRepository>(provider => new SourceRepository(Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "data", "sources.json")));
-            
-            services.AddHostedService<BackgroundSourceScanner>();
+
+            services.AddTransient<IPlaylistRepository>(provider => new PlaylistRepository(Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "data", "playlists.json")));
+
+            //services.AddHostedService<BackgroundSourceScanner>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

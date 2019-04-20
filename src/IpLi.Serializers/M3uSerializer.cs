@@ -9,11 +9,11 @@ namespace IpLi.Serializers
 {
     public static  class M3uSerializer
     {
-        public static String Serialize(Playlist playlist)
+        public static String Serialize(List<Channel> channels)
         {
             var content = new StringBuilder(50);
             content.AppendLine("#EXTM3U");
-            foreach (var channel in playlist.Channels)
+            foreach (var channel in channels)
             {
                 content.Append("#EXTINF:-1,")
                        .AppendLine(channel.Title);

@@ -51,6 +51,25 @@ namespace IpLi.Data.Json
             return allChannels[alias];
         }
 
+        public async Task<List<Channel>> GetAsync(List<String> titles,
+                                                  CancellationToken cancel = default)
+        {
+            var allChannels = await GetAllChannelsFromFileAsync(cancel);
+            var result = new List<Channel>(titles.Count);
+            foreach (var title in titles)
+            {
+                var channel = allChannels.Values.FirstOrDefault(x => x.Title
+                                                                      .ToLowerInvariant()
+                                                                      .Equals(title.ToLowerInvariant()));
+                if(channel != null)
+                {
+                    result.Add(channel);
+                }
+            }
+
+            return result;
+        }
+
         public async Task<Page<Channel>> GetAsync(ChannelQuery query,
                                                   CancellationToken cancel = default)
         {
@@ -83,7 +102,6 @@ namespace IpLi.Data.Json
         {
             var allChannels = await GetAllChannelsFromFileAsync(cancel);
             allChannels[channel.Alias] = channel;
-
 
             await SaveAllChannelsToFileAsync(allChannels, cancel);
             return channel;
