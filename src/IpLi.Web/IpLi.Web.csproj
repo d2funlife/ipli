@@ -42,7 +42,9 @@
     </ItemGroup>
 
     <ItemGroup>
+      <TypeScriptCompile Include="ClientApp\src\app\sortable.directive.ts" />
       <TypeScriptCompile Include="ClientApp\src\app\source\source.component.ts" />
+      <TypeScriptCompile Include="ClientApp\src\app\source\source.service.ts" />
     </ItemGroup>
 
     <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

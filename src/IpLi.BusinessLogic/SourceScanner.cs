@@ -118,7 +118,6 @@ namespace IpLi.BusinessLogic
                     foreach (var alternativeTitle in channel.AlternativeTitles)
                     {
                         var alternativeTitleLower = alternativeTitle.ToLowerInvariant();
-                        if(sources.ContainsKey(alternativeTitleLower))
                         {
                             processingSources.AddRange(sources[alternativeTitleLower]);
                         }

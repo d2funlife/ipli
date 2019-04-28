@@ -1,22 +1,35 @@
-import { Component, Inject } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
+import {DecimalPipe} from '@angular/common';
+import {Component, QueryList, ViewChildren} from '@angular/core';
+import {Observable} from 'rxjs';
 
-@Component({
-  selector: "sources",
-  templateUrl: "./source.component.html"
-})
+import {Source} from './source';
+import {SourceService} from './source.service';
+import {NgbdSortableHeader, SortEvent} from '../sortable.directive';
+
+
+@Component(
+  {selector: 'ngbd-table-complete', templateUrl: './source.component.html', providers: [SourceService, DecimalPipe]})
 export class SourceComponent {
+  sources$: Observable<Source[]>;
+  total$: Observable<number>;
 
-  page = 1;
-  pageSize = 10;
-  collectionSize = 0;
+  @ViewChildren(NgbdSortableHeader) headers: QueryList<NgbdSortableHeader>;
 
-  constructor(http: HttpClient, @Inject("BASE_URL") baseUrl: string) {
-    http.get<Source[]>(baseUrl + "api/sources").subscribe(
-      result => {
-        this.sources = result;
-      },
-      error => console.error(error)
-    );
+  constructor(public service: SourceService) {
+    this.sources$ = service.sources$;
+    this.total$ = service.total$;
+  }
+
+  onSort({column, direction}: SortEvent) {
+    // resetting other headers
+    this.headers.forEach(header => {
+      if (header.sortable !== column) {
+        header.direction = '';
+      }
+    });
+
+    this.service.sortColumn = column;
+    this.service.sortDirection = direction;
   }
 }
+
