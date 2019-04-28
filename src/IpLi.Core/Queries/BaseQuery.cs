@@ -139,5 +139,10 @@ namespace IpLi.Core.Queries
 
             return new List<(String orderField, Boolean isAsc)> {DefaultOrder};
         }
+
+        protected void SetLimit(Int32 limit)
+        {
+            _limit = limit;
+        }
     }
 }

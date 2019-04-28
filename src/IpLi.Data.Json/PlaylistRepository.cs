@@ -29,6 +29,15 @@ namespace IpLi.Data.Json
             return playlist;
         }
 
+        public async Task<Playlist> GetAsync(String alias,
+                                             CancellationToken cancel)
+        {
+            var allPlaylists = await GetAllPlaylistsFromFileAsync(cancel);
+            return allPlaylists.ContainsKey(alias)
+                ? allPlaylists[alias]
+                : null;
+        }
+
         private async Task<Dictionary<String, Playlist>> GetAllPlaylistsFromFileAsync(CancellationToken cancel)
         {
             if(!File.Exists(_filePath))

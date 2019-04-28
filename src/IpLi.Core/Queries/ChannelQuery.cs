@@ -1,4 +1,5 @@
 using System;
+using IpLi.Core.Converters;
 
 namespace IpLi.Core.Queries
 {
@@ -8,6 +9,13 @@ namespace IpLi.Core.Queries
                             Int32 limit = DefaultLimit)
             : base(offset, limit)
         {
+        }
+
+        public static ChannelQuery GetAll()
+        {
+            var query = new ChannelQuery();
+            query.SetLimit(Int32.MaxValue);
+            return query;
         }
     }
 }

@@ -12,6 +12,8 @@ namespace IpLi.Core.Entities
         public String CurrentSourceUrl { get; set; }
         public Source[] Sources { get; set; }
 
+        public Boolean LockSourceUrl { get; set; }
+
         public void Update(Channel target)
         {
             if(target == null)
@@ -22,6 +24,8 @@ namespace IpLi.Core.Entities
             Title = target.Title;
             AlternativeTitles = target.AlternativeTitles;
             ImageUrl = target.ImageUrl;
+            CurrentSourceUrl = target.CurrentSourceUrl;
+            LockSourceUrl = target.LockSourceUrl;
         }
     }
 }

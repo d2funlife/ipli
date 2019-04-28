@@ -1,8 +1,6 @@
 using System;
 using IpLi.Core.Converters;
 using IpLi.Core.Entities;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
-
 namespace IpLi.Web.Models.Requests
 {
     public class EditChannelRequest
@@ -13,6 +11,10 @@ namespace IpLi.Web.Models.Requests
 
         public String ImageUrl { get; set; }
 
+        public String CurrentSourceUrl { get; set; }
+
+        public Boolean LockSourceUrl { get; set; }
+
         public Channel ToDomain()
         {
             return new Channel
@@ -20,7 +22,9 @@ namespace IpLi.Web.Models.Requests
                 Alias = StringToUrlStandard.ConvertWithLower(Title),
                 Title = Title,
                 AlternativeTitles = AlternativeTitles,
-                ImageUrl = ImageUrl
+                ImageUrl = ImageUrl,
+                CurrentSourceUrl = CurrentSourceUrl,
+                LockSourceUrl = LockSourceUrl
             };
         }
     }

@@ -9,5 +9,8 @@ namespace IpLi.Data.Contracts
     {
         Task<Playlist> CreateAsync(Playlist playlist,
                                    CancellationToken cancel = default);
+
+        Task<Playlist> GetAsync(String alias,
+                                CancellationToken cancel);
     }
 }

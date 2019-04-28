@@ -25,6 +25,12 @@ namespace IpLi.Data.Json
         {
             var allSources = await GetAllSourcesFromFileAsync(cancel);
 
+            if(!String.IsNullOrEmpty(query.Search))
+            {
+                allSources = allSources.Values.Where(x => x.Title.Contains(query.Search, StringComparison.OrdinalIgnoreCase))
+                                       .ToDictionary(x => x.Id);
+            }
+
             return new Page<Source>
             {
                 TotalCount = allSources.Count,

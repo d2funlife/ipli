@@ -11,7 +11,7 @@ namespace IpLi.Core.Contracts
         Task<Page<Playlist>> GetAsync(PlaylistQuery query,
                                       CancellationToken cancel = default);
 
-        Task<Playlist> GetAsync(String name,
+        Task<Playlist> GetAsync(String alias,
                                 CancellationToken cancel = default);
 
         Task<Playlist> CreateAsync(Playlist playlist,

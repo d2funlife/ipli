@@ -6,5 +6,6 @@ namespace IpLi.Core.Contracts
     public interface ISourceScanner
     {
         Task ScanAllAsync(CancellationToken cancel = default);
+        Task SetSourcesToAllChannelsAsync(CancellationToken cancel = default);
     }
 }

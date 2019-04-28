@@ -9,7 +9,7 @@ namespace IpLi.Serializers
 {
     public static  class M3uSerializer
     {
-        public static String Serialize(List<Channel> channels)
+        public static String Serialize(IEnumerable<Channel> channels)
         {
             var content = new StringBuilder(50);
             content.AppendLine("#EXTM3U");

@@ -23,10 +23,10 @@ namespace IpLi.BusinessLogic
             throw new NotImplementedException();
         }
 
-        public Task<Playlist> GetAsync(String name,
+        public Task<Playlist> GetAsync(String alias,
                                        CancellationToken cancel = default)
         {
-            throw new NotImplementedException();
+            return _playlistRepository.GetAsync(alias, cancel);
         }
 
         public Task<Playlist> CreateAsync(Playlist playlist,

@@ -45,7 +45,7 @@ namespace IpLi.Web
 
             services.AddTransient<IPlaylistRepository>(provider => new PlaylistRepository(Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "data", "playlists.json")));
 
-            //services.AddHostedService<BackgroundSourceScanner>();
+            services.AddHostedService<BackgroundSourceScanner>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

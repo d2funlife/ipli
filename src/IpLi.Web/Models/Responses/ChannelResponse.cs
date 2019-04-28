@@ -10,6 +10,7 @@ namespace IpLi.Web.Models.Responses
         public String Title { get; set; }
         public String[] AlternativeTitles { get; set; }
         public String ImageUrl { get; set; }
+        public String CurrentSourceUrl { get; set; }
         
         public ChannelResponse(Channel channel)
         {
@@ -17,6 +18,7 @@ namespace IpLi.Web.Models.Responses
             Title = channel.Title;
             AlternativeTitles = channel.AlternativeTitles;
             ImageUrl = channel.ImageUrl;
+            CurrentSourceUrl = channel.CurrentSourceUrl;
         }
     }
 }

@@ -22,7 +22,7 @@ namespace IpLi.Web.Services
         public Task StartAsync(CancellationToken cancellationToken)
         {
             _cancel = cancellationToken;
-            _taskTimer = new System.Timers.Timer(21600000)
+            _taskTimer = new System.Timers.Timer(TimeSpan.FromDays(3).TotalMilliseconds)
             {
                 AutoReset = false
             };
@@ -43,7 +43,9 @@ namespace IpLi.Web.Services
         private void ProcessTask(Object sender,
                                  System.Timers.ElapsedEventArgs e)
         {
-            _sourceScanner.ScanAllAsync(_cancel);
+            _sourceScanner.ScanAllAsync(_cancel).GetAwaiter().GetResult();
+            _sourceScanner.SetSourcesToAllChannelsAsync(_cancel).GetAwaiter().GetResult();
+            
             if(!_isTaskStopRequested)
             {
                 _taskTimer.Start();
