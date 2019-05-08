@@ -8,8 +8,11 @@ import {HttpClientModule} from '@angular/common/http';
 
 import {AppComponent} from './app.component';
 import {SidenavComponent} from './sidenav/sidenav.component';
-import {PlaylistsComponent} from './playlists/playlists.component';
 import {ToolbarComponent} from "./toolbar/toolbar.component";
+import {PlaylistsComponent} from './playlists/playlists.component';
+import {ChannelsComponent} from "./channels/channels.component";
+import {SourcesComponent} from "./sources/sources.component";
+
 import {NavMenuComponent} from './nav-menu/nav-menu.component';
 import {HomeComponent} from './home/home.component';
 import {CounterComponent} from './counter/counter.component';
@@ -19,25 +22,31 @@ import {MaterialModule} from './shared/material.module';
 import {FlexLayoutModule} from '@angular/flex-layout';
 
 const routes: Routes = [
-  {
-    path: 'playlists', component: AppComponent,
-    children: [
-      {path: '', component: PlaylistsComponent}
-    ]
+  {path: 'playlists', component: PlaylistsComponent, data :{
+    toolbarTitle : "Playlists"
+    }},
+  {path: 'channels', component: ChannelsComponent},
+  {path: 'sources', component: SourcesComponent },
+  { path: '',
+    redirectTo: '/playlists',
+    pathMatch: 'full'
   },
-  {path: '**', redirectTo: 'playlists'}
+  { path: '**', redirectTo: "/playlists" }
 ];
 
 @NgModule({
   declarations: [
     AppComponent,
     SidenavComponent,
+    ToolbarComponent,
+    PlaylistsComponent,
+    SourcesComponent,
+    ChannelsComponent,
+
     NavMenuComponent,
     HomeComponent,
     CounterComponent,
     FetchDataComponent,
-    PlaylistsComponent,
-    ToolbarComponent
   ],
   imports: [
     BrowserModule.withServerTransition({appId: 'ng-cli-universal'}),
