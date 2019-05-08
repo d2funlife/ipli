@@ -1,43 +1,57 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import { FormsModule, ReactiveFormsModule} from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
-import { RouterModule } from '@angular/router';
+import {NgModule} from '@angular/core';
+import {CommonModule} from "@angular/common";
+import {Routes, RouterModule} from '@angular/router';
+import {BrowserModule} from '@angular/platform-browser';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {HttpClientModule} from '@angular/common/http';
 
-import { AppComponent } from './app.component';
-import { NavMenuComponent } from './nav-menu/nav-menu.component';
-import { HomeComponent } from './home/home.component';
-import { CounterComponent } from './counter/counter.component';
-import { FetchDataComponent } from './fetch-data/fetch-data.component';
-import { SourceComponent } from './source/source.component';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { NgbdSortableHeader } from './sortable.directive';
-import { CommonModule } from "@angular/common";
+import {AppComponent} from './app.component';
+import {SidenavComponent} from './sidenav/sidenav.component';
+import {PlaylistsComponent} from './playlists/playlists.component';
+import {ToolbarComponent} from "./toolbar/toolbar.component";
+import {NavMenuComponent} from './nav-menu/nav-menu.component';
+import {HomeComponent} from './home/home.component';
+import {CounterComponent} from './counter/counter.component';
+import {FetchDataComponent} from './fetch-data/fetch-data.component';
+
+import {MaterialModule} from './shared/material.module';
+import {FlexLayoutModule} from '@angular/flex-layout';
+
+const routes: Routes = [
+  {
+    path: 'playlists', component: AppComponent,
+    children: [
+      {path: '', component: PlaylistsComponent}
+    ]
+  },
+  {path: '**', redirectTo: 'playlists'}
+];
 
 @NgModule({
   declarations: [
     AppComponent,
+    SidenavComponent,
     NavMenuComponent,
     HomeComponent,
     CounterComponent,
     FetchDataComponent,
-    SourceComponent
+    PlaylistsComponent,
+    ToolbarComponent
   ],
   imports: [
-    BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
+    BrowserModule.withServerTransition({appId: 'ng-cli-universal'}),
+    BrowserAnimationsModule,
     CommonModule,
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    NgbModule,
-    RouterModule.forRoot([
-      { path: '', component: HomeComponent, pathMatch: 'full' },
-      { path: 'counter', component: CounterComponent },
-      { path: 'fetch-data', component: FetchDataComponent },
-      { path: 'sources', component: SourceComponent}
-    ])
+    RouterModule.forRoot(routes),
+    MaterialModule,
+    FlexLayoutModule
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}
