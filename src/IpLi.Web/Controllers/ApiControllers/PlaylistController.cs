@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 using IpLi.Core.Contracts;
 using IpLi.Web.Models.Requests;
@@ -18,6 +19,14 @@ namespace IpLi.Web.Controllers.ApiControllers
         {
             _playlistManager = playlistManager;
             _channelManager = channelManager;
+        }
+
+        [HttpGet]
+        public async Task<ActionResult<PlaylistShortResponse>> Get(GetPlaylistsRequest playlistsRequest)
+        {
+            var playlists = await _playlistManager.GetAsync(playlistsRequest.ToDomain(), Cancel);
+            SetTotalCountHeader(playlists.TotalCount);
+            return Ok(playlists.Items.Select(x => new PlaylistShortResponse(x)));
         }
 
         [HttpGet("{alias}")]

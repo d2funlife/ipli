@@ -104,7 +104,7 @@ namespace IpLi.BusinessLogic
                 {
                     continue;
                 }
-                
+
                 var titleLower = channel.Title.ToLowerInvariant();
 
                 List<Source> processingSources = new List<Source>(1);
@@ -119,7 +119,10 @@ namespace IpLi.BusinessLogic
                     {
                         var alternativeTitleLower = alternativeTitle.ToLowerInvariant();
                         {
-                            processingSources.AddRange(sources[alternativeTitleLower]);
+                            if(sources.ContainsKey(alternativeTitleLower))
+                            {
+                                processingSources.AddRange(sources[alternativeTitleLower]);
+                            }
                         }
                     }
                 }

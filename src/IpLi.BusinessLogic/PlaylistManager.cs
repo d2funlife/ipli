@@ -20,7 +20,7 @@ namespace IpLi.BusinessLogic
         public Task<Page<Playlist>> GetAsync(PlaylistQuery query,
                                              CancellationToken cancel = default)
         {
-            throw new NotImplementedException();
+            return _playlistRepository.GetAsync(query, cancel);
         }
 
         public Task<Playlist> GetAsync(String alias,

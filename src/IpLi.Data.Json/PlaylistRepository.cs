@@ -1,9 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using IpLi.Core.Entities;
+using IpLi.Core.Queries;
 using IpLi.Data.Contracts;
 using Newtonsoft.Json;
 
@@ -36,6 +38,17 @@ namespace IpLi.Data.Json
             return allPlaylists.ContainsKey(alias)
                 ? allPlaylists[alias]
                 : null;
+        }
+
+        public async Task<Page<Playlist>> GetAsync(PlaylistQuery query,
+                                                   CancellationToken cancel)
+        {
+            var allPlaylists = await GetAllPlaylistsFromFileAsync(cancel);
+            return new Page<Playlist>
+            {
+                TotalCount = allPlaylists.Count,
+                Items = allPlaylists.Select(x => x.Value).Skip(query.Offset).Take(query.Limit).ToList()
+            };
         }
 
         private async Task<Dictionary<String, Playlist>> GetAllPlaylistsFromFileAsync(CancellationToken cancel)

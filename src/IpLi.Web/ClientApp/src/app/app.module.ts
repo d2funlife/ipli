@@ -20,6 +20,7 @@ import {FetchDataComponent} from './fetch-data/fetch-data.component';
 
 import {MaterialModule} from './shared/material.module';
 import {FlexLayoutModule} from '@angular/flex-layout';
+import {ChannelService} from "./services/channel.service";
 
 const routes: Routes = [
   {path: 'playlists', component: PlaylistsComponent, data :{
@@ -59,7 +60,7 @@ const routes: Routes = [
     MaterialModule,
     FlexLayoutModule
   ],
-  providers: [],
+  providers: [ChannelService],
   bootstrap: [AppComponent]
 })
 export class AppModule {
